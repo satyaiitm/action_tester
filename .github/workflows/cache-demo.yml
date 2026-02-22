@@ -10,7 +10,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Prime cache  # REQUIRED step name
+    - name: prime-cache-c20766b  # REQUIRED step name
       id: cache-step
       uses: actions/cache@v4  # REQUIRED version (v4 or newer)
       with:

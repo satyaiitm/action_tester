@@ -1,0 +1,16 @@
+name: Hello Action with Email  # Workflow name (shows in UI)
+
+on: [push]  # Triggers on any push to any branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Free Linux runner (virtual machine)
+    steps:
+    - name: Checkout code  # Step 1: Grab your repo files
+      uses: actions/checkout@v4  # Reusable action from GitHub
+
+    - name: 22f3003016@ds.study.iitm.ac.in  # Your required step (email in name)
+      run: echo "Hello, world! Action triggered."  # Simple command
+
+    - name: List files  # Bonus step: Shows it works
+      run: ls -la

@@ -1,0 +1,25 @@
+name: Daily Auto-Commit
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Runs daily at 9:00 AM UTC (adjust to your timezone if needed)
+  workflow_dispatch:     # Allows manual testing
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo with Satya C (22f3003016@ds.study.iitm.ac.in)
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update timestamp file
+        run: |
+          echo "$(date -u)" > last-update.txt
+
+      - name: Commit changes by Satya C (22f3003016@ds.study.iitm.ac.in)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Daily automated update - $(date -u)"
+          file_pattern: last-update.txt

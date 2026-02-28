@@ -1,25 +1,26 @@
-name: Daily Auto-Commit
+name: Daily Repository Update
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # Runs daily at 9:00 AM UTC (adjust to your timezone if needed)
-  workflow_dispatch:     # Allows manual testing
+    # Runs every day at 05:30 UTC (specific time, no wildcards)
+    - cron: '30 5 * * *'
+  workflow_dispatch:  # allows manual trigger
 
 jobs:
-  update:
+  daily-commit:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo with Satya C (22f3003016@ds.study.iitm.ac.in)
+      - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update timestamp file
+      - name: 22f3003016@ds.study.iitm.ac.in - Create Daily Commit
         run: |
-          echo "$(date -u)" > last-update.txt
-
-      - name: Commit changes by Satya C (22f3003016@ds.study.iitm.ac.in)
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Daily automated update - $(date -u)"
-          file_pattern: last-update.txt
+          echo "Last updated on $(date -u)" >> daily-log.txt
+          
+          git config --global user.name "DevSync Bot"
+          git config --global user.email "22f3003016@ds.study.iitm.ac.in"
+          
+          git add daily-log.txt
+          git commit -m "Automated daily update - $(date -u)" || echo "No changes to commit"
+          git push

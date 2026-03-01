@@ -20,7 +20,7 @@ const urls = [
   
   for (const url of urls) {
     const page = await context.newPage();
-    await page.goto(url, { waitUntil: 'networkidle' });
+    await page.goto(url, { await page.waitForTimeout(3000) });
     
     // Wait for tables to load (dynamic content)
     await page.waitForSelector('table');

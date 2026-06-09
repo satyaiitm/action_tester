@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "Last updated on $(date -u)" >> daily-log.txt
           
-          git config --global user.name "DevSync Bot"
+          git config --global user.name "satyaiitm"
           git config --global user.email "22f3003016@ds.study.iitm.ac.in"
           
           git add daily-log.txt
